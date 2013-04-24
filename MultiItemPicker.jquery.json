@@ -1,0 +1,27 @@
+{
+  "name": "MultiItemPicker",
+  "title": "multiitempicker",
+  "description": "A jQuery plugin to create two multi-select boxes that are connected to each other.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/theJoeBiz/MultiItemPicker",
+  "author": {
+    "name": "Joe Duchnowski",
+    "email": "theJoeBiz@gmail.com",
+    "url": "http://joeduchnowski.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/theJoeBiz/MultiItemPicker.git"
+  },
+  "bugs": "https://github.com/theJoeBiz/MultiItemPicker/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/theJoeBiz/MultiItemPicker/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "*"
+  },
+  "keywords": []
+}

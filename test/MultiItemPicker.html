@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>multiitempicker Test Suite</title>
+	<!-- Load local jQuery. This can be overridden with a ?jquery=___ param. -->
+	<script src="../libs/jquery-loader.js"></script>
+	<!-- Load local QUnit. -->
+	<link rel="stylesheet" href="../libs/qunit/qunit.css" media="screen">
+	<script src="../libs/qunit/qunit.js"></script>
+	<!-- Load local lib and tests. -->
+	<script src="../src/MultiItemPicker.js"></script>
+	<script src="MultiItemPicker_test.js"></script>
+	<!-- Removing access to jQuery and $. But it'll still be available as _$, if
+       you REALLY want to mess around with jQuery in the console. REMEMBER WE
+       ARE TESTING A PLUGIN HERE, THIS HELPS ENSURE BEST PRACTICES. REALLY. -->
+	<script>window._$ = jQuery.noConflict(true);</script>
+</head>
+<body>
+	<div id="qunit"></div>
+	<div id="qunit-fixture">
+		<div id="custom-picker-div">
+			<select class="fromBox"></select>
+			<select class="toBox"></select>
+			<button class="addButton"></button>
+			<button class="removeButton"></button>
+		</div>
+		
+		<table id="custom-picker-table">
+			<tr>
+				<td>
+					<select class="fromBox"></select>
+				</td>
+				<td>
+					<select class="toBox"></select>
+				</td>
+			</tr>
+		</table>
+		<div id="empty-picker-div"></div>
+		<table id="empty-picker-table"></table>
+
+		<div id="honor-generate-elements-flag"></div>
+	</div>
+</body>
+</html>
