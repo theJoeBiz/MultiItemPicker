@@ -14,12 +14,12 @@
         var publicMethods = {
             getRightBoxItems: function () {
                 initializeElements();
-                var items = elems.toBox.find('option');
+                var items = elems.rightBox.find('option');
                 return convertOptionsToObjectArray(items);
             },
             getLeftBoxItems: function () {
                 initializeElements();
-                var items = elems.fromBox.find('option');
+                var items = elems.leftBox.find('option');
                 return convertOptionsToObjectArray(items);
             }
         };
@@ -45,14 +45,14 @@
         }
 
         function tidyUpToStart() {
-            deselectAllOptionsInBox(elems.fromBox, elems.toBox);
+            deselectAllOptionsInBox(elems.leftBox, elems.rightBox);
             if (options.keepAlphabetical) {
-                alphabetizeItemsInBox(elems.fromBox, elems.toBox);
-                if (elems.fromBox.find('option:first').length) {
-                    elems.fromBox.find('option:first').attr('selected', true);
+                alphabetizeItemsInBox(elems.leftBox, elems.rightBox);
+                if (elems.leftBox.find('option:first').length) {
+                    elems.leftBox.find('option:first').attr('selected', true);
                     toggleButtonEnabled('add');
-                } else if (elems.toBox.find('option:first').length) {
-                    elems.toBox.find('option:first').attr('selected', true);
+                } else if (elems.rightBox.find('option:first').length) {
+                    elems.rightBox.find('option:first').attr('selected', true);
                     toggleButtonEnabled('remove');
                 } else {
                     toggleButtonEnabled('none');
@@ -61,12 +61,12 @@
         }
 
         function initializeElements() {
-            // Set fromBox variable to the corresponding DOM element, create if it doesn't already exist
-            elems.fromBox = root.find('.fromBox:first');
-            if (!elems.fromBox.length && options.generateElements !== false) {
-                elems.fromBox = $('<select/>');
+            // Set leftBox variable to the corresponding DOM element, create if it doesn't already exist
+            elems.leftBox = root.find('.leftBox:first');
+            if (!elems.leftBox.length && options.generateElements !== false) {
+                elems.leftBox = $('<select/>');
             }
-            elems.fromBox.addClass('fromBox').attr('multiple', true);
+            elems.leftBox.addClass('leftBox').attr('multiple', true);
 
             // Set addButton variable to the corresponding DOM element, create if it doesn't already exist
             elems.addButton = root.find('.addButton:first');
@@ -82,12 +82,12 @@
             }
             elems.removeButton.addClass('removeButton');
 
-            // Set toBox variable to the corresponding DOM element, create if it doesn't already exist
-            elems.toBox = root.find('.toBox:first');
-            if (!elems.toBox.length && options.generateElements !== false) {
-                elems.toBox = $('<select/>');
+            // Set rightBox variable to the corresponding DOM element, create if it doesn't already exist
+            elems.rightBox = root.find('.rightBox:first');
+            if (!elems.rightBox.length && options.generateElements !== false) {
+                elems.rightBox = $('<select/>');
             }
-            elems.toBox.addClass('toBox').attr('multiple', true);
+            elems.rightBox.addClass('rightBox').attr('multiple', true);
         }
 
         function populateSelectBoxes() {
@@ -110,8 +110,8 @@
                 }
             };
 
-            fillBox(elems.fromBox, options.fromBoxItems);
-            fillBox(elems.toBox, options.toBoxItems);
+            fillBox(elems.leftBox, options.leftBoxItems);
+            fillBox(elems.rightBox, options.rightBoxItems);
         }
 
         function tableizeElements() {
@@ -120,7 +120,7 @@
 
             var row = $('<tr/>').appendTo(table);
             elems.leftCell = $('<td/>')
-                .append(elems.fromBox)
+                .append(elems.leftBox)
                 .addClass('leftCell')
                 .appendTo(row);
 
@@ -131,7 +131,7 @@
                 .appendTo(row);
 
             elems.rightCell = $('<td/>')
-                .append(elems.toBox)
+                .append(elems.rightBox)
                 .addClass('rightCell')
                 .appendTo(row);
         }
@@ -139,11 +139,11 @@
         function bindEvents() {
             // When an item is double clicked
             // directly trigger the method that moves selected items to the other box
-            if (elems.fromBox.length) {
-                elems.fromBox.dblclick(moveSelectedItemsRight);
+            if (elems.leftBox.length) {
+                elems.leftBox.dblclick(moveSelectedItemsRight);
             }
-            if (elems.toBox.length) {
-                elems.toBox.dblclick(moveSelectedItemsLeft);
+            if (elems.rightBox.length) {
+                elems.rightBox.dblclick(moveSelectedItemsLeft);
             }
 
             // When add or remove button is clicked
@@ -157,15 +157,15 @@
 
             // The change event is triggered on multiselect boxes whenever an item is selected
             // We want to disable the unnecessary button and deselect the items in the opposite box
-            if (elems.fromBox.length) {
-                elems.fromBox.change(function () {
-                    deselectAllOptionsInBox(elems.toBox);
+            if (elems.leftBox.length) {
+                elems.leftBox.change(function () {
+                    deselectAllOptionsInBox(elems.rightBox);
                     toggleButtonEnabled('add');
                 });
             }
-            if (elems.toBox.length) {
-                elems.toBox.change(function () {
-                    deselectAllOptionsInBox(elems.fromBox);
+            if (elems.rightBox.length) {
+                elems.rightBox.change(function () {
+                    deselectAllOptionsInBox(elems.leftBox);
                     toggleButtonEnabled('remove');
                 });
             }
@@ -189,36 +189,36 @@
         }
 
         function moveSelectedItemsRight() {
-            var items = elems.fromBox.find('option:selected').remove();
+            var items = elems.leftBox.find('option:selected').remove();
             addItemsToRightBox(items);
         }
 
         function addItemsToRightBox(items) {
             triggerCallback(options.beforeAdding);
 
-            elems.toBox.append(items);
+            elems.rightBox.append(items);
             toggleButtonEnabled('remove');
-            deselectAllOptionsInBox(elems.fromBox);
+            deselectAllOptionsInBox(elems.leftBox);
             if (options.keepAlphabetical) {
-                alphabetizeItemsInBox(elems.toBox);
+                alphabetizeItemsInBox(elems.rightBox);
             }
 
             triggerCallback(options.afterAdded);
         }
 
         function moveSelectedItemsLeft() {
-            var items = elems.toBox.find('option:selected').remove();
+            var items = elems.rightBox.find('option:selected').remove();
             addItemsToLeftBox(items);
         }
 
         function addItemsToLeftBox(items) {
             triggerCallback(options.beforeRemoving);
 
-            elems.fromBox.append(items);
+            elems.leftBox.append(items);
             toggleButtonEnabled('add');
-            deselectAllOptionsInBox(elems.toBox);
+            deselectAllOptionsInBox(elems.rightBox);
             if (options.keepAlphabetical) {
-                alphabetizeItemsInBox(elems.fromBox);
+                alphabetizeItemsInBox(elems.leftBox);
             }
 
             triggerCallback(options.afterRemoved);
@@ -253,7 +253,7 @@
         }
 
         function triggerCallback(arg) {
-            return typeof (arg) === 'function' ? arg(elems.fromBox, elems.toBox) : true;
+            return typeof (arg) === 'function' ? arg(elems.leftBox, elems.rightBox) : true;
         }
 
         function convertOptionsToObjectArray(items) {
@@ -289,12 +289,15 @@
     };
 
     $.MultiItemPicker.defaults = {
+        generateElements: true,
+        styleElements: true,
+        keepAlphabetical: true,
         styles: {
-            fromBox: {
+            leftBox: {
                 minWidth: 150,
                 minHeight: 200
             },
-            toBox: {
+            rightBox: {
                 minWidth: 150,
                 minHeight: 200
             },
