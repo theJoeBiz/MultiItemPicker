@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>MultiItemPicker Examples</title>
+	<!-- Load local jQuery. This can be overridden with a ?jquery=___ param. -->
+	<script src="../libs/jquery-loader.js"></script>
+	<!-- Load local lib and tests. -->
+	<script src="../src/MultiItemPicker.js"></script>
+	<script>
+		$(function () {
+			$('#custom-picker-div').MultiItemPicker({
+				generateElements: false,
+				styleElements: false,
+				afterAdded: function () {
+					alert('custom-picker-div item has been added.');
+				}
+			});
+			$('#custom-picker-table').MultiItemPicker({
+				generateElements: false,
+				leftBoxItems: [
+					"First Element",
+					"Second Element",
+					["Third Element", "3"]
+				],
+				beforeAdding: function () {
+					alert('custom-picker-table will be added.');
+				}
+			});
+			$('#empty-picker-div').MultiItemPicker({
+				rightBoxItems: [
+					"Right Box Element"
+				]
+			});
+			$('#empty-picker-table').MultiItemPicker();
+		});
+	</script>
+</head>
+<body>
+	<h2>Custom div with all elements</h2>
+	<div id="custom-picker-div">
+		<select class="leftBox">
+			<option value="1">Test 1</option>
+			<option value="2">Test 2</option>
+		</select>
+		<select class="rightBox"></select><br />
+		<button class="addButton">+</button>
+		<button class="removeButton">-</button>
+	</div>
+	<br /><br />
+	<h2>Custom table with only leftBox and rightBox</h2>
+	<table id="custom-picker-table">
+		<tr>
+			<td>
+				<select class="leftBox"></select>
+			</td>
+			<td>
+				<select class="rightBox"></select>
+			</td>
+		</tr>
+	</table>
+	<br /><br />
+	<h2>Empty div with elements created by plugin</h2>
+	<div id="empty-picker-div"></div>
+	<br /><br />
+	<h2>Empty table with elements created by plugin and no options set</h2>
+	<table id="empty-picker-table"></table>
+</body>
+</html>
