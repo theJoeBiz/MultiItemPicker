@@ -43,18 +43,22 @@ var rightBoxItems = $('#targetElement').MultiItemPicker('getRightBoxItems');
 ## Options
 Cookie attributes can be set globally by setting properties of the `$.MultiItemPicker.defaults` object or individually for each call to `$.MultiItemPicker()` by passing a plain object to the options argument. Per-call options override the default options.
 ### generateElements (boolean)
+The `generateElements` flag is **true** by default. It should only be set to false if the element you are performing on has all of the required elements already. If you want to do this, you need to have at least a select box with class "leftBox" and a select box with "rightBox". If you want buttons and are setting this flag to false, you need to include buttons with class "addButton" and "removeButton".
 ```
 generateElements: false
 ```
-### styleElements
+### styleElements (boolean)
+The `styleElements` flag is **true** by default. It should only be set to false if you want to style your own elements using CSS. If left as true, a table will be created containing the necessary elements to make this plugin work.
 ```
 styleElements: false
 ```
-### keepAlphabetical
+### keepAlphabetical (boolean)
+The `keepAlphabetical` flag is **true** by default. This option runs a sort option after each move between boxes to keep everything in order instead of just appending to the end of the destination box.
 ```
 keepAlphabetical: false
 ```
-### leftBoxItems
+### leftBoxItems (Array)
+The `leftBoxItems` array is empty by default. If you want to prepopulate the box, you can pass them as an array to this option. If you want to pass a text AND a value, you can pass an array of arrays. In the inner array, the first value is the text and the second value is the value of the resulting <option> element.
 ```
 leftBoxItems: [
   ["Test1", "1"],
@@ -70,7 +74,8 @@ will produce:
   <option value="Test3">Test3</option>
 </select>
 ```
-### rightBoxItems
+### rightBoxItems (Array)
+The `rightBoxItems` array is empty by default. If you want to prepopulate the box, you can pass them as an array to this option. If you want to pass a text AND a value, you can pass an array of arrays. In the inner array, the first value is the text and the second value is the value of the resulting <option> element.
 ```
 rightBoxItems: [
   ["Test 4", "4"],
@@ -86,7 +91,8 @@ will produce:
   <option value="Test 6">Test 6</option>
 </select>
 ```
-### styles
+### styles (Object)
+The styles object give you the ability to style any of the created elements without having to do it manually in a seperate css file. Below are the default styles set by the plugin. If you don't want any styles to be added, set the `styleElements` flag to false.
 ```
 styles: {
   leftBox: {
@@ -111,25 +117,29 @@ styles: {
   }
 }
 ```
-### beforeAdding
+### beforeAdding (Function)
+The `beforeAdding` function will be called before an item is moved from the leftBox to the rightBox. The response passes two parameters, **leftBox** and **rightBox**. Those variables are the respective DOM elements.
 ```
 beforeAdding: function(leftBox, rightBox) {
   // Do stuff
 }
 ```
-### afterAdded
+### afterAdded (Function)
+The `afterAdded` function will be called after an item is moved from the leftBox to the rightBox. The response passes two parameters, **leftBox** and **rightBox**. Those variables are the respective DOM elements.
 ```
 afterAdded: function(leftBox, rightBox) {
   // Do stuff
 }
 ```
-### beforeRemoving
+### beforeRemoving (Function)
+The `beforebeforeRemovingAdding` function will be called before an item is moved from the rightBox to the leftBox. The response passes two parameters, **leftBox** and **rightBox**. Those variables are the respective DOM elements.
 ```
 beforeRemoving: function(leftBox, rightBox) {
   // Do stuff
 }
 ```
-### afterRemoved
+### afterRemoved (Function)
+The `afterRemoved` function will be called after an item is moved from the rightBox to the leftBox. The response passes two parameters, **leftBox** and **rightBox**. Those variables are the respective DOM elements.
 ```
 afterRemoved: function(leftBox, rightBox) {
   // Do stuff
