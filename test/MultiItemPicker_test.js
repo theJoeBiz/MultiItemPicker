@@ -43,7 +43,7 @@
         ok(this.customDiv.MultiItemPicker(), 'should run parameterless');
         ok(this.customDiv.MultiItemPicker({}), 'should accept an object as a parameter');
         ok(this.customDiv.MultiItemPicker('getRightBoxItems'), 'should accept a string as a parameter');
-        throws(function () { this.customDiv.MultiItemPicker(function () { }) }, function (err) { return err.message === 'The MultiItemPicker plugin requires the first argument to be an object or string.' }, 'should throw exception when parameter is a function');
+        throws(function () { this.customDiv.MultiItemPicker(function () { }); }, function (err) { return err.message === 'The MultiItemPicker plugin requires the first argument to be an object or string.'; }, 'should throw exception when parameter is a function');
     });
 
     test('creates "fromBox" when it doesn\'t exist', function () {

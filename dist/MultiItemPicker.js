@@ -1,11 +1,6 @@
-/*
- * MultiItemPicker
- * https://github.com/theJoeBiz/MultiItemPicker
- *
- * Copyright (c) 2013 Joe Duchnowski
- * Licensed under the MIT license.
- */
-
+/*! multiitempicker - v0.1.0 - 2013-04-25
+* https://github.com/theJoeBiz/MultiItemPicker
+* Copyright (c) 2013 Joe Duchnowski; Licensed MIT */
 (function ($) {
     $.MultiItemPicker = function (elem, options) {
         var root = $(elem),
