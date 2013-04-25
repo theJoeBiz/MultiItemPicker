@@ -46,20 +46,20 @@
         throws(function () { this.customDiv.MultiItemPicker(function () { }); }, function (err) { return err.message === 'The MultiItemPicker plugin requires the first argument to be an object or string.'; }, 'should throw exception when parameter is a function');
     });
 
-    test('creates "fromBox" when it doesn\'t exist', function () {
+    test('creates "leftBox" when it doesn\'t exist', function () {
         this.emptyDiv.empty();
         this.emptyDiv.MultiItemPicker();
 
-        strictEqual(this.emptyDiv.find('.fromBox').length, 1, 'should exist');
-        ok(this.emptyDiv.find('.fromBox').is('select[multiple]'), 'should be a multiple select box');
+        strictEqual(this.emptyDiv.find('.leftBox').length, 1, 'should exist');
+        ok(this.emptyDiv.find('.leftBox').is('select[multiple]'), 'should be a multiple select box');
     });
 
-    test('creates "toBox" when it doesn\'t exist', function () {
+    test('creates "rightBox" when it doesn\'t exist', function () {
         this.emptyDiv.empty();
         this.emptyDiv.MultiItemPicker();
 
-        strictEqual(this.emptyDiv.find('.toBox').length, 1, 'should exist');
-        ok(this.emptyDiv.find('.toBox').is('select[multiple]'), 'should be a multiple select box');
+        strictEqual(this.emptyDiv.find('.rightBox').length, 1, 'should exist');
+        ok(this.emptyDiv.find('.rightBox').is('select[multiple]'), 'should be a multiple select box');
     });
 
     test('creates "addButton" when it doesn\'t exist', function () {
@@ -78,18 +78,18 @@
         ok(this.emptyDiv.find('.removeButton').is('button'), 'should be a button');
     });
 
-    test('uses "fromBox" if it already exists', function () {
+    test('uses "leftBox" if it already exists', function () {
         this.customDiv.MultiItemPicker();
 
-        strictEqual(this.customDiv.find('.fromBox').length, 1, 'should exist');
-        ok(this.customDiv.find('.fromBox').is('select[multiple]'), 'should be a multiple select box');
+        strictEqual(this.customDiv.find('.leftBox').length, 1, 'should exist');
+        ok(this.customDiv.find('.leftBox').is('select[multiple]'), 'should be a multiple select box');
     });
 
-    test('uses "toBox" if it already exists', function () {
+    test('uses "rightBox" if it already exists', function () {
         this.customDiv.MultiItemPicker();
 
-        strictEqual(this.customDiv.find('.toBox').length, 1, 'should exist');
-        ok(this.customDiv.find('.toBox').is('select[multiple]'), 'should be a multiple select box');
+        strictEqual(this.customDiv.find('.rightBox').length, 1, 'should exist');
+        ok(this.customDiv.find('.rightBox').is('select[multiple]'), 'should be a multiple select box');
     });
 
     test('uses "addButton" if it already exists', function () {
@@ -109,25 +109,25 @@
     test('honors false generateElements flag', function () {
         this.honorGenerateElementsFlag.MultiItemPicker({ generateElements: false });
 
-        strictEqual(this.honorGenerateElementsFlag.find('.fromBox').length, 0, 'fromBox should not exist');
-        strictEqual(this.honorGenerateElementsFlag.find('.toBox').length, 0, 'toBox should not exist');
+        strictEqual(this.honorGenerateElementsFlag.find('.leftBox').length, 0, 'leftBox should not exist');
+        strictEqual(this.honorGenerateElementsFlag.find('.rightBox').length, 0, 'rightBox should not exist');
         strictEqual(this.honorGenerateElementsFlag.find('.addButton').length, 0, 'addButton should not exist');
         strictEqual(this.honorGenerateElementsFlag.find('.removeButton').length, 0, 'removeButton should not exist');
     });
 
     test('correctly returns values when public functions are called via string', function () {
         var leftBoxItems = [
-            ["Test One", "TestOne"],
-            ["Test Two", "TestTwo"]
+            ["Test1", "Test1"],
+            ["Test2", "Test2"]
         ];
         var rightBoxItems = [
-            ["Test Three", "TestThree"],
-            ["Test Four", "TestFour"]
+            ["Test3", "Test3"],
+            ["Test4", "Test4"]
         ];
 
         this.customTable.MultiItemPicker({
-            toBoxItems: rightBoxItems,
-            fromBoxItems: leftBoxItems
+            rightBoxItems: rightBoxItems,
+            leftBoxItems: leftBoxItems
         });
 
         var expectedLeftBoxItems = [];
